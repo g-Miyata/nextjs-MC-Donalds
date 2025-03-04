@@ -24,21 +24,35 @@ export const CartContext = createContext<ICartContext>({
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [products, setProducts] = useState<CartProduct[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const toggleCart = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev);
   };
+
   const addProduct = (product: CartProduct) => {
-    setProducts((prev) => [...prev, product]);
+    const productIsAlreadyOnTheCart = products.some(
+      (prevProduct) => prevProduct.id === product.id,
+    );
+
+    if (!productIsAlreadyOnTheCart) {
+      setProducts((prev) => [...prev, product]);
+      return;
+    }
+
+    setProducts((prevProducts) =>
+      prevProducts.map((prevProduct) =>
+        prevProduct.id === product.id
+          ? {
+              ...prevProduct,
+              quantity: prevProduct.quantity + product.quantity,
+            }
+          : prevProduct,
+      ),
+    );
   };
+
   return (
-    <CartContext.Provider
-      value={{
-        isOpen,
-        products,
-        toggleCart,
-        addProduct,
-      }}
-    >
+    <CartContext.Provider value={{ isOpen, products, toggleCart, addProduct }}>
       {children}
     </CartContext.Provider>
   );
