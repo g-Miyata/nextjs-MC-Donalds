@@ -24,7 +24,7 @@ const CartProductItem = ({ product }: CartItemProps) => {
             {product.name}
           </p>
           <p className="text-sm font-semibold">
-            {formatCurrency(product.price * product.quantity)}
+            {formatCurrency(product.price)}
           </p>
           <div className="flex items-center gap-1 text-center">
             <Button
