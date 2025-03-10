@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/sheet";
 import { formatCurrency } from "@/helpers/format-currency";
 
-import { CartContext } from "../../context/cart";
+import { CartContext } from "../context/cart";
 import CartProductItem from "./cart-product-item";
 import FinishOrderDialog from "./finish-order-dialog";
 

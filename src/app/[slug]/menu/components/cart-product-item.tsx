@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/helpers/format-currency";
 
-import { CartContext, CartProduct } from "../../context/cart";
+import { CartContext, CartProduct } from "../context/cart";
 
 interface CartItemProps {
   product: CartProduct;
